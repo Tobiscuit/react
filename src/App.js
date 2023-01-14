@@ -6,29 +6,17 @@ import SearchBar from './components/SearchBar';
 import { searchImages } from './api';
 
 function App() {
-  const [input, setInput] = useState('');
-  const [images, setImages] = useState([]);
+  const handleSubmit = async (term) => {
+    const results = await searchImages(term);
 
-  const handleInput = (e) => {
-    setInput(e.target.value);
-  };
-
-  const handleSubmit = (term) => {
-    setImages(() => {
-      searchImages(input);
-    });
+    console.log(results);
   };
 
   return (
     <div>
-      <SearchBar
-        input={input}
-        handleInput={handleInput}
-        onSubmit={handleSubmit}
-      />
+      <SearchBar onSubmit={handleSubmit} />
       {/* <ImageList input={input} list={searchImages(input)} />
        */}
-      <ImageList list={images} />
     </div>
   );
 }
